@@ -26,7 +26,7 @@ btn5 = Button(root, fg="red", bg="yellow", text="버튼 5")
 btn5.pack()
 
 #이미지 버튼 생성
-photo = PhotoImage(file="btn_image.png")
+photo = PhotoImage(file="image1.png")
 btn6 = Button(root, image=photo)
 btn6.pack()
 
