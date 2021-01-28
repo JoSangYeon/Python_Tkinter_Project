@@ -64,3 +64,4 @@ menu.add_cascade(label="도움말", menu=menu_help)
 """메모장 실행"""
 root.config(menu=menu)
 root.mainloop()
+"""메모장 실행"""
