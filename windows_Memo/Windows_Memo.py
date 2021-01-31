@@ -69,7 +69,7 @@ class Note_Menu():
         """
         content = self.txt.get("1.0", END)
         if os.path.isfile(self.filename):
-            f = open(self.filename, "w")
+            f = open(self.filename, "w", encoding="utf8")
             f.write(content)
             f.close()
 
