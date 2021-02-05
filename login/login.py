@@ -18,7 +18,7 @@ class JSY_Login:
 
         ###로그인 화면 로고(?)###
         self.main_logo = Label(self.root, text="JSY Login", font=("courier", 16, "bold"))
-        self.main_logo.pack()
+        self.main_logo.pack(padx=3, pady=3)
 
         ###ID/PW 입력창###
         self.id_pw_frame = LabelFrame(self.root, text="ID/PW")
@@ -27,35 +27,47 @@ class JSY_Login:
         self.id_frame = LabelFrame(self.id_pw_frame, text="ID : ")
         self.id_frame.pack(fill="both", expand=True)
         self.id_entry = Entry(self.id_frame)
-        self.id_entry.pack(expand=True)
+        self.id_entry.pack(expand=True, padx=3, pady=3)
 
         self.pw_frame = LabelFrame(self.id_pw_frame, text="PW : ")
         self.pw_frame.pack(fill="both", expand=True)
         self.pw_entry = Entry(self.pw_frame, show="*")
-        self.pw_entry.pack(expand=True)
-
+        self.pw_entry.pack(expand=True, padx=3, pady=3)
+        
+        """회원가입 / 로그인 버튼"""
         self.assign_frame = Frame(self.root)
-        self.assign_frame.pack(fill="both", expand=True)
+        self.assign_frame.pack(fill="both", expand=True, padx=3, pady=3)
 
         self.btn_login = Button(self.assign_frame, text="로그인", command=self.login)
-        self.btn_login.pack(side="right")
+        self.btn_login.pack(side="right", padx=3, pady=3)
 
         self.btn_assign = Button(self.assign_frame, text="회원가입",
                                  command=lambda: self.assign(self.id_entry.get(), self.pw_entry.get()))
-        self.btn_assign.pack(side="left")
-
-        self.start()
+        self.btn_assign.pack(side="left", padx=3, pady=3)
 
     def start(self):
-        ###화면 출력 및 실행###
+        """프로그램 실행"""
         self.root.mainloop()
 
-    ###회원가입/로그인###
     def login(self):
-        print("아이디:",self.id_entry.get())
-        print("비밀번호:",self.pw_entry.get())
+        """로그인 버튼 command"""
+        id_pw_set = (self.id_entry.get(), self.pw_entry.get())
+
+        if len(id_pw_set[0]) == 0:
+            msgbox.showwarning("로그인", "아이디를 입력해주세요")
+            return
+        elif len(id_pw_set[1]) == 0:
+            msgbox.showwarning("로그인", "비밀번호를 입력하세요!")
+            return
+
+        if id_pw_set in self.user:
+            print("로그인 성공")
+        else:
+            msgbox.showwarning("로그인", "등록되지 않은 ID입니다.")
+            return
 
     def assign(self, id, pw):
+        """회원가입 command"""
         assign_root = assign(self.root)
 
 class assign:
@@ -97,7 +109,7 @@ class assign:
         self.btn_create.pack()
 
     def id_check(self, id):
-        ids, pws = list(zip(*(JSY_Login.user)))
+        ids, pws = list(zip(*JSY_Login.user))
         if id in ids:
             msgbox.showwarning("회원가입", "이미 사용중인 아이디입니다.")
             self.id_checking = False
@@ -130,7 +142,8 @@ class assign:
 
 def main():
     myApp = JSY_Login()
-    print("asd")
+    myApp.start()
+
 
 if __name__=="__main__":
     main()
