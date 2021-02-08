@@ -14,6 +14,7 @@ class JSY_Login:
         ###메인 창 생성###
         self.root = Tk()
         self.root.title("JSY GUI")  # 제목 설정
+        self.root.geometry("200x200")
         self.root.resizable(False, False)  # 창 크기 고정
 
         ###로그인 화면 로고(?)###
@@ -22,17 +23,17 @@ class JSY_Login:
 
         ###ID/PW 입력창###
         self.id_pw_frame = LabelFrame(self.root, text="ID/PW")
-        self.id_pw_frame.pack()
+        self.id_pw_frame.pack(fill="both", expand=True, padx=3, pady=3)
 
         self.id_frame = LabelFrame(self.id_pw_frame, text="ID : ")
         self.id_frame.pack(fill="both", expand=True)
         self.id_entry = Entry(self.id_frame)
-        self.id_entry.pack(expand=True, padx=3, pady=3)
+        self.id_entry.pack(fill="both",expand=True, padx=3, pady=3)
 
         self.pw_frame = LabelFrame(self.id_pw_frame, text="PW : ")
         self.pw_frame.pack(fill="both", expand=True)
         self.pw_entry = Entry(self.pw_frame, show="*")
-        self.pw_entry.pack(expand=True, padx=3, pady=3)
+        self.pw_entry.pack(fill="both",expand=True, padx=3, pady=3)
         
         """회원가입 / 로그인 버튼"""
         self.assign_frame = Frame(self.root)
@@ -63,7 +64,7 @@ class JSY_Login:
         if id_pw_set in self.user:
             print("로그인 성공")
         else:
-            msgbox.showwarning("로그인", "등록되지 않은 ID입니다.")
+            msgbox.showwarning("로그인", "올바르지 않은 ID/PW입니다.")
             return
 
     def assign(self, id, pw):
