@@ -2,8 +2,6 @@
 
 Python GUI모듈 Tkinter 프로젝트입니다.
 
-
-
 ## image_merge
 여러 이미지를 합병하는 프로그램입니다.
 
@@ -18,7 +16,7 @@ Python GUI모듈 Tkinter 프로젝트입니다.
 Tkinter 모듈 연습으로 구현한 로그인 프로그램입니다.
 
 2021.02.03
-+ 대략적인 로그인 화면 특 구현
++ 대략적인 로그인 화면 특징 구현
 + 회원가입 기능 구현
 
 2021.02.05
@@ -29,6 +27,10 @@ Tkinter 모듈 연습으로 구현한 로그인 프로그램입니다.
 2021.02.08
 + 출력 결과물 수정(크기 수정)
 + sqlite 연습(추후에 login.py와 연동 예정)
+
+2021.02.15
++ user_data.db파일로 사용자 정보 관리
++ login.py 파일 db파일과 연동을 위한 수정
 
 ## mouse_monitoring
 python의 각종 keyborad, mouse 모듈과 tkinter 모듈을 통해 사용자 입력을 실시간으로 탐지하는 프로그램 입니다.
