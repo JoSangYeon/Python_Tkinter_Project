@@ -11,8 +11,7 @@ conn = sqlite3.connect("test.db", isolation_level=None)
 c = conn.cursor()
 
 """테이블 생성"""
-cmd = """CREATE TABLE IF NOT EXISTS table1
-(id integer PRIMARY KEY, name text, birthday text)"""
+cmd = """CREATE TABLE IF NOT EXISTS table1 (id integer PRIMARY KEY, ID text, PW text)"""
 c.execute(cmd)
 
 """실습전 이전 데이터 삭제"""
@@ -106,3 +105,5 @@ c.execute("DELETE FROM table1 WHERE id='%s'" % 5)
 # 확인
 for row in c.execute('SELECT * FROM table1'):
     print(row)
+
+c.execute("INSERT INTO table1 VALUES('CHO', '1998-12-19')")
