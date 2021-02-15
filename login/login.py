@@ -1,11 +1,33 @@
 from tkinter import *  # 티킨터 모듈에 있는 함수를 사용
 import tkinter.messagebox as msgbox
+import sqlite3 # 유저 계정정보 연결
+
+class User_Data:
+    def __init__(self):
+        """db파일 생성"""
+        self.conn = sqlite3.connect("user_data.db", isolation_level=None)
+
+        """커서 선언"""
+        self.c = self.conn.cursor()
+
+    def get_user_data(self):
+        self.c.execute("SELECT * FROM user_table")
+        data = self.c.fetchall()
+
+        return data
+
+    def add_user(self, id, pw):
+        self.c.execute("INSERT INTO user_table(ID, PW) VALUES(?, ?)", (id, pw))
+        return
 
 class JSY_Login:
     ###User ID/PW data###
     # 튜플로 (id, pw)의 형태로 구성
     # 추후에 mysql 적용해서 구현할 예정
-    user = [("admin", "admin"),("whtkddus98", "sy1219")]
+    # user = [("admin", "admin"),("whtkddus98", "sy1219")]
+
+    ###유저 data 객체 생성###
+    user = User_Data()
 
     def __init__(self):
         """
@@ -61,7 +83,7 @@ class JSY_Login:
             msgbox.showwarning("로그인", "비밀번호를 입력하세요!")
             return
 
-        if id_pw_set in self.user:
+        if id_pw_set in self.user.get_user_data():
             print("로그인 성공")
         else:
             msgbox.showwarning("로그인", "올바르지 않은 ID/PW입니다.")
@@ -110,7 +132,8 @@ class assign:
         self.btn_create.pack()
 
     def id_check(self, id):
-        ids, pws = list(zip(*JSY_Login.user))
+        ids, pws = zip(*JSY_Login.user.get_user_data())
+
         if id in ids:
             msgbox.showwarning("회원가입", "이미 사용중인 아이디입니다.")
             self.id_checking = False
@@ -137,9 +160,10 @@ class assign:
         elif self.pw_entry.get() != self.check_entry.get():
             msgbox.showwarning("회원가입", "비밀번호를 재확인해주세요!")
         else:
-            JSY_Login.user.append((self.id_entry.get(), self.pw_entry.get()))
+            JSY_Login.user.add_user(self.id_entry.get(), self.pw_entry.get())
             msgbox.showinfo("회원가입", "회원가입이 완료되었습니다.")
             self.assign_window.destroy()
+
 
 def main():
     myApp = JSY_Login()
