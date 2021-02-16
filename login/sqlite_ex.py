@@ -105,5 +105,3 @@ c.execute("DELETE FROM table1 WHERE id='%s'" % 5)
 # 확인
 for row in c.execute('SELECT * FROM table1'):
     print(row)
-
-c.execute("INSERT INTO table1 VALUES('CHO', '1998-12-19')")
